@@ -15,36 +15,36 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Crypto.cpp">
+    <ClCompile Include="Hashing\Crypto.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Performance.cpp">
+    <ClCompile Include="Hashing\Performance.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Caesar.cpp">
+    <ClCompile Include="Hashing\Caesar.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Hasher.cpp">
+    <ClCompile Include="Hashing\Hasher.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Md5.cpp">
+    <ClCompile Include="Hashing\Md5.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Performance.h">
+    <ClInclude Include="Hashing\Performance.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Caesar.h">
+    <ClInclude Include="Hashing\Caesar.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Hasher.h">
+    <ClInclude Include="Hashing\Hasher.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Md5.h">
+    <ClInclude Include="Hashing\Md5.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Sha.hpp">
+    <ClInclude Include="Hashing\Sha.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

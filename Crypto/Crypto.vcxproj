@@ -140,18 +140,18 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Caesar.cpp" />
-    <ClCompile Include="Crypto.cpp" />
-    <ClCompile Include="Hasher.cpp" />
-    <ClCompile Include="Md5.cpp" />
-    <ClCompile Include="Performance.cpp" />
+    <ClCompile Include="Hashing\Caesar.cpp" />
+    <ClCompile Include="Hashing\Crypto.cpp" />
+    <ClCompile Include="Hashing\Hasher.cpp" />
+    <ClCompile Include="Hashing\Md5.cpp" />
+    <ClCompile Include="Hashing\Performance.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Caesar.h" />
-    <ClInclude Include="Hasher.h" />
-    <ClInclude Include="Md5.h" />
-    <ClInclude Include="Performance.h" />
-    <ClInclude Include="Sha.hpp" />
+    <ClInclude Include="Hashing\Caesar.h" />
+    <ClInclude Include="Hashing\Hasher.h" />
+    <ClInclude Include="Hashing\Md5.h" />
+    <ClInclude Include="Hashing\Performance.h" />
+    <ClInclude Include="Hashing\Sha.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
