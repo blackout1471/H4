@@ -101,7 +101,6 @@ namespace SecurePassword
             return false;
         }
 
-
         /// <summary>
         /// Updates the login tries for the given user  to be plus 1 try.
         /// </summary>
