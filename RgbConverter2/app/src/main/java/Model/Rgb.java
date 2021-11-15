@@ -5,26 +5,44 @@ public class Rgb {
     private char gValue;
     private char bValue;
 
+    /*
+    * Retrieve red value
+     */
     public char getrValue() {
         return rValue;
     }
 
+    /*
+    * set red value
+     */
     public void setrValue(char rValue) {
         this.rValue = rValue;
     }
 
+    /*
+    * get green value
+     */
     public char getgValue() {
         return gValue;
     }
 
+    /*
+    * set green value
+     */
     public void setgValue(char gValue) {
         this.gValue = gValue;
     }
 
+    /*
+    * get blue value
+     */
     public char getbValue() {
         return bValue;
     }
 
+    /*
+    * set blue value
+     */
     public void setbValue(char bValue) {
         this.bValue = bValue;
     }
@@ -36,6 +54,9 @@ public class Rgb {
         setbValue(b);
     }
 
+    /*
+    * Converts the rgb values to a single int
+     */
     public int convertToInt()
     {
         int rgb = getrValue();
@@ -43,6 +64,4 @@ public class Rgb {
         rgb = (rgb << 8) + getbValue();
         return rgb;
     }
-
-
 }

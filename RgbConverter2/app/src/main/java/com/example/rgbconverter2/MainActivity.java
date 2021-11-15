@@ -10,6 +10,23 @@ import Model.Rgb;
 
 public class MainActivity extends AppCompatActivity {
 
+    /*
+    * Retrieve the hex values
+     */
+    public String getHexValue() {
+        return hexValue;
+    }
+
+    /*
+    * set hex value
+     */
+    public void setHexValue(String hexValue) {
+        this.hexValue = hexValue;
+
+        TextView tView = findViewById(R.id.HexValue);
+        tView.setText("Hex: " + hexValue);
+    }
+
     private Rgb rgbValue;
     private String hexValue;
 
@@ -22,6 +39,9 @@ public class MainActivity extends AppCompatActivity {
         initializeSeekBars();
     }
 
+    /*
+    * Initializes the seekbars settings
+     */
     private void initializeSeekBars() {
         // find all required seekbars
         SeekBar seekR = findViewById(R.id.r);
@@ -39,6 +59,9 @@ public class MainActivity extends AppCompatActivity {
         setSeekBarListener(seekB);
     }
 
+    /*
+    * Sets the given seekbars listener.
+     */
     private void setSeekBarListener(SeekBar bar)
     {
         bar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
@@ -72,16 +95,5 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
-    }
-
-    public String getHexValue() {
-        return hexValue;
-    }
-
-    public void setHexValue(String hexValue) {
-        this.hexValue = hexValue;
-
-        TextView tView = findViewById(R.id.HexValue);
-        tView.setText("Hex: " + hexValue);
     }
 }
