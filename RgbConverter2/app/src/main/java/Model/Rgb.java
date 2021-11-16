@@ -1,6 +1,6 @@
 package Model;
 
-public class Rgb {
+public class Rgb implements RgbAble {
     private char rValue;
     private char gValue;
     private char bValue;
@@ -8,50 +8,50 @@ public class Rgb {
     /*
     * Retrieve red value
      */
-    public char getrValue() {
+    public char getRValue() {
         return rValue;
     }
 
     /*
     * set red value
      */
-    public void setrValue(char rValue) {
+    public void setRValue(char rValue) {
         this.rValue = rValue;
     }
 
     /*
     * get green value
      */
-    public char getgValue() {
+    public char getGValue() {
         return gValue;
     }
 
     /*
     * set green value
      */
-    public void setgValue(char gValue) {
+    public void setGValue(char gValue) {
         this.gValue = gValue;
     }
 
     /*
     * get blue value
      */
-    public char getbValue() {
+    public char getBValue() {
         return bValue;
     }
 
     /*
     * set blue value
      */
-    public void setbValue(char bValue) {
+    public void setBValue(char bValue) {
         this.bValue = bValue;
     }
 
     public Rgb(char r, char g, char b)
     {
-        setrValue(r);
-        setgValue(g);
-        setbValue(b);
+        setRValue(r);
+        setGValue(g);
+        setBValue(b);
     }
 
     /*
@@ -59,9 +59,9 @@ public class Rgb {
      */
     public int convertToInt()
     {
-        int rgb = getrValue();
-        rgb = (rgb << 8) + getgValue();
-        rgb = (rgb << 8) + getbValue();
+        int rgb = getRValue();
+        rgb = (rgb << 8) + getGValue();
+        rgb = (rgb << 8) + getBValue();
         return rgb;
     }
 }

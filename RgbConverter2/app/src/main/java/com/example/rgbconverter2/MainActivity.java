@@ -70,16 +70,16 @@ public class MainActivity extends AppCompatActivity {
                 switch (seekBar.getId())
                 {
                     case R.id.r:
-                        rgbValue.setrValue((char)progress);
-                        ((TextView)findViewById(R.id.rCurValue)).setText("" + (int)rgbValue.getrValue());
+                        rgbValue.setRValue((char)progress);
+                        ((TextView)findViewById(R.id.rCurValue)).setText("" + (int)rgbValue.getRValue());
                         break;
                     case R.id.g:
-                        rgbValue.setgValue((char)progress);
-                        ((TextView)findViewById(R.id.gCurValue)).setText("" + (int)rgbValue.getgValue());
+                        rgbValue.setGValue((char)progress);
+                        ((TextView)findViewById(R.id.gCurValue)).setText("" + (int)rgbValue.getGValue());
                         break;
                     case R.id.b:
-                        rgbValue.setbValue((char)progress);
-                        ((TextView)findViewById(R.id.bCurValue)).setText("" + (int)rgbValue.getbValue());
+                        rgbValue.setBValue((char)progress);
+                        ((TextView)findViewById(R.id.bCurValue)).setText("" + (int)rgbValue.getBValue());
                         break;
                 }
                 setHexValue(Integer.toHexString(rgbValue.convertToInt()));
