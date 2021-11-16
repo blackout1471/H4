@@ -63,7 +63,7 @@ public class FixerRateDao implements RateDaoAble {
         for (Rate rate : rates)
             newRates.add(new Rate(rate.getName(), rate.getValue() * euroValue));
 
-        return rates;
+        return newRates;
     }
 
     /**

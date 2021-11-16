@@ -32,13 +32,16 @@ public class MainActivity extends AppCompatActivity implements CurrencyPresenter
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        // Presenter for MVP.
         presenter = new CurrencyPresenter(this);
 
+        // The ui objects.
         dropDownMenu = findViewById(R.id.currencyDropDown);
         converterButton = findViewById(R.id.convertButton);
         valueText = findViewById(R.id.currencyTextField);
         rateConvertedView = findViewById(R.id.currenyListView);
 
+        // Create listeners.
         findViewById(R.id.convertButton).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -50,6 +53,10 @@ public class MainActivity extends AppCompatActivity implements CurrencyPresenter
         });
     }
 
+    /**
+     * Updates the dropdown menu with new labels.
+     * @param dropDownRates The rates to update with.
+     */
     public void setDropDownRates(ArrayList<Rate> dropDownRates) {
         Context curContext = this;
 
@@ -67,6 +74,10 @@ public class MainActivity extends AppCompatActivity implements CurrencyPresenter
         });
     }
 
+    /**
+     * Updates the rate result in the view.
+     * @param rates The rates to update with.
+     */
     public void setListRateResults(ArrayList<Rate> rates)
     {
         Context curContext = this;
