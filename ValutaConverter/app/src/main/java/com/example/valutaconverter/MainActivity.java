@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity implements CurrencyPresenter
             @Override
             public void onClick(View v) {
                 String currentRate = dropDownMenu.getSelectedItem().toString();
-                double amount = Integer.parseInt(valueText.getText().toString());
+                double amount = Double.parseDouble(valueText.getText().toString());
 
                 presenter.convertToRate(currentRate, amount);
             }
