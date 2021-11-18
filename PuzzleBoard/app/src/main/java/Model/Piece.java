@@ -20,6 +20,6 @@ public class Piece {
     private int value;
 
     public Piece(int _value) {
-        setValue(value);
+        setValue(_value);
     }
 }

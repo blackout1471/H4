@@ -1,11 +1,6 @@
 package Business;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
 
-import Model.Piece;
 import Model.Puzzle;
 
 public class BoardManager implements BoardManageAble {
@@ -29,7 +24,6 @@ public class BoardManager implements BoardManageAble {
     private Puzzle puzzle;
 
     public BoardManager() {
-
     }
 
     @Override
@@ -38,7 +32,100 @@ public class BoardManager implements BoardManageAble {
     }
 
     @Override
-    public boolean canPieceMove(int xPos, int yPos) {
+    public boolean canPieceMoveUp(int xPos, int yPos) {
+        try {
+            if (getPuzzle().getPiece(xPos, yPos - 1).getValue() == 0)
+                return true;
+        }
+        catch (ArrayIndexOutOfBoundsException ex)
+        {
+            return false;
+        }
+
         return false;
     }
+
+    @Override
+    public boolean canPieceMoveDown(int xPos, int yPos) {
+        try {
+            if (getPuzzle().getPiece(xPos, yPos + 1).getValue() == 0)
+                return true;
+        }
+        catch (ArrayIndexOutOfBoundsException ex)
+        {
+            return false;
+        }
+
+        return false;
+    }
+
+    @Override
+    public boolean canPieceMoveRight(int xPos, int yPos) {
+        try {
+            if (getPuzzle().getPiece(xPos + 1, yPos).getValue() == 0)
+                return true;
+        }
+        catch (ArrayIndexOutOfBoundsException ex)
+        {
+            return false;
+        }
+
+        return false;
+    }
+
+    @Override
+    public boolean canPieceMoveLeft(int xPos, int yPos) {
+        try {
+            if (getPuzzle().getPiece(xPos - 1, yPos).getValue() == 0)
+                return true;
+        }
+        catch (ArrayIndexOutOfBoundsException ex)
+        {
+            return false;
+        }
+
+        return false;
+    }
+
+    @Override
+    public boolean movePieceUp(int xPos, int yPos) {
+        if (!canPieceMoveUp(xPos, yPos))
+            return false;
+
+        getPuzzle().exchangePlaces(xPos, yPos, xPos, yPos-1);
+
+        return true;
+    }
+
+    @Override
+    public boolean movePieceDown(int xPos, int yPos) {
+        if (!canPieceMoveDown(xPos, yPos))
+            return false;
+
+        getPuzzle().exchangePlaces(xPos, yPos, xPos, yPos+1);
+
+        return true;
+    }
+
+    @Override
+    public boolean movePieceRight(int xPos, int yPos) {
+        if (!canPieceMoveRight(xPos, yPos))
+            return false;
+
+        getPuzzle().exchangePlaces(xPos, yPos, xPos+1, yPos);
+
+        return true;
+    }
+
+    @Override
+    public boolean movePieceLeft(int xPos, int yPos) {
+        if (!canPieceMoveLeft(xPos, yPos))
+            return false;
+
+        getPuzzle().exchangePlaces(xPos, yPos, xPos-1, yPos);
+
+        return true;
+    }
+
+
 }
