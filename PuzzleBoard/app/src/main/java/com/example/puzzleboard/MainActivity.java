@@ -3,20 +3,15 @@ package com.example.puzzleboard;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.ClipData;
-import android.content.ClipDescription;
-import android.graphics.Color;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.DragEvent;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TableLayout;
 import android.widget.TextView;
 
-import Business.BoardManager;
 import Model.Piece;
 import Model.Puzzle;
 import Presenter.PuzzlePresenter;
@@ -66,9 +61,24 @@ public class MainActivity extends AppCompatActivity implements PuzzlePresenter.V
 
     @Override
     public void gameUpdate(Piece[] pieces, int width, int height) {
-
+        createGame(pieces, width, height);
     }
 
+    @Override
+    public void gameIsWon() {
+        LinearLayout grid = findViewById(R.id.gridLinearLayout);
+        grid.removeAllViews();
+
+        TextView v = new TextView(this);
+        v.setText("Game is won");
+
+        grid.addView(v);
+    }
+
+    /**
+     * Creates a new row for the pieces to be in
+     * @return
+     */
     private LinearLayout createRow() {
         LinearLayout ll = new LinearLayout(this);
 
@@ -83,6 +93,12 @@ public class MainActivity extends AppCompatActivity implements PuzzlePresenter.V
         return ll;
     }
 
+    /**
+     * Creates a new column, also called a piece.
+     * @param xPos The x pos to create it in.
+     * @param yPos The y pos to create it in.
+     * @return A new piece.
+     */
     private PieceView createColumn(int xPos, int yPos) {
         PieceView tv = new PieceView(this, xPos, yPos);
 
@@ -101,6 +117,9 @@ public class MainActivity extends AppCompatActivity implements PuzzlePresenter.V
         return tv;
     }
 
+    /**
+     * Long click listener
+     */
     private View.OnLongClickListener longClickListener = new View.OnLongClickListener() {
         @Override
         public boolean onLongClick(View v) {
@@ -112,57 +131,88 @@ public class MainActivity extends AppCompatActivity implements PuzzlePresenter.V
         }
     };
 
+    /**
+     * Drag listener
+     */
     private View.OnDragListener dragListener = new View.OnDragListener() {
         @Override
         public boolean onDrag(View v, DragEvent event) {
             int dragEvent = event.getAction();
 
-            Log.i("DragEvent", "event: " + dragEvent);
+            PieceView curView;
+            PieceView dragView;
 
             switch (dragEvent)
             {
                 case DragEvent.ACTION_DRAG_ENTERED:
-                    PieceView curView = (PieceView)v;
-                    PieceView dragView = (PieceView)event.getLocalState();
-
-                    int xDir = dragView.getxPos() - curView.getxPos();
-                    int yDir = dragView.getyPos() - curView.getyPos();
-
-                    Puzzle.Direction dir = getDirection(xDir, yDir);
-
-                    if (dir == Puzzle.Direction.INVALID)
-                        curView.setBackgroundColor(Color.RED);
+                    curView = (PieceView)v;
+                    dragView = (PieceView)event.getLocalState();
+                    onDragEntered(curView, dragView);
                     break;
                 case DragEvent.ACTION_DROP:
+                    curView = (PieceView)v;
+                    dragView = (PieceView)event.getLocalState();
+                    onDragDrop(curView, dragView);
                     break;
                 case DragEvent.ACTION_DRAG_ENDED:
                     break;
                 case DragEvent.ACTION_DRAG_EXITED:
-                    PieceView cv = (PieceView)v;
-                    cv.setBackgroundColor(Color.WHITE);
+                    curView = (PieceView)v;
+                    dragView = (PieceView)event.getLocalState();
+                    onDragExited(curView, dragView);
                     break;
             }
 
-            return false;
+            return true;
         }
     };
 
-    private Puzzle.Direction getDirection(int xVal, int yVal) {
-        if (xVal != 0 && yVal != 0)
-            return Puzzle.Direction.INVALID;
+    /**
+     * On drag Drop method, to handle on drop
+     * @param curView
+     * @param dragView
+     */
+    private void onDragDrop(PieceView curView, PieceView dragView) {
+        Puzzle.Direction dir = presenter.getDirection(
+                dragView.getxPos(), dragView.getyPos(),
+                curView.getxPos(), curView.getyPos()
+        );
 
-        if (xVal > 0)
-            return Puzzle.Direction.RIGHT;
+        curView.setBackgroundToDefault();
 
-        if (xVal < 0)
-            return Puzzle.Direction.LEFT;
+        presenter.movePiece(dir, dragView.getxPos(), dragView.getyPos());
+    }
 
-        if (yVal > 0)
-            return Puzzle.Direction.UP;
+    /**
+     * On drag exited for the drag.
+     * @param curView
+     * @param dragView
+     */
+    private void onDragExited(PieceView curView, PieceView dragView) {
+        curView.setBackgroundToDefault();
+    }
 
-        if (yVal < 0)
-            return Puzzle.Direction.DOWN;
+    /**
+     * Handles the on drag entered event for on drag.
+     * @param curView
+     * @param dragView
+     */
+    private void onDragEntered(PieceView curView, PieceView dragView) {
+        Puzzle.Direction dir = presenter.getDirection(
+                dragView.getxPos(), dragView.getyPos(),
+                curView.getxPos(), curView.getyPos()
+        );
 
-        return Puzzle.Direction.INVALID;
+        switch (dir) {
+            case UP:
+            case DOWN:
+            case RIGHT:
+            case LEFT:
+                curView.setBackgroundToValid();
+                break;
+            case INVALID:
+                curView.setBackgroundToInvalid();
+                break;
+        }
     }
 }

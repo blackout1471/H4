@@ -1,6 +1,7 @@
 package Business;
 
 
+import Model.Piece;
 import Model.Puzzle;
 
 public class BoardManager implements BoardManageAble {
@@ -125,6 +126,17 @@ public class BoardManager implements BoardManageAble {
         getPuzzle().exchangePlaces(xPos, yPos, xPos-1, yPos);
 
         return true;
+    }
+
+    @Override
+    public boolean isGameWon() {
+        Piece[] pieces = getPuzzle().getPieces();
+
+        for(int i = 0; i < pieces.length-1; i++)
+            if (pieces[i].getValue() != i+1)
+                return false;
+
+        return pieces[pieces.length-1].getValue() == 0;
     }
 
 

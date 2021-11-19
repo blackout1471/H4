@@ -80,4 +80,9 @@ public interface BoardManageAble {
     boolean movePieceLeft(int xPos, int yPos);
 
 
+    /**
+     * Returns whether the game is won or not.
+     */
+    boolean isGameWon();
+
 }
